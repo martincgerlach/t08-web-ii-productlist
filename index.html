@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studio Shop | Vælg kategori</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="index.html">STUDIO SHOP<span> / </span></a>
+      <span>Udvalgt til hverdagen</span>
+    </header>
+    <main>
+      <p class="eyebrow">Shop efter kategori</p>
+      <div class="page-heading home-heading">
+        <h1>Find din næste favorit.</h1>
+        <p>Vælg en kategori, og gå direkte til produkterne.</p>
+      </div>
+      <p id="status" role="status">Henter kategorier…</p>
+      <button id="retry" type="button" hidden>Prøv igen</button>
+      <nav class="category_list_container" aria-label="Produktkategorier" aria-busy="true"></nav>
+      <noscript>Slå JavaScript til for at se kategorierne.</noscript>
+    </main>
+    <footer>STUDIO SHOP / Studieprojekt · 08.01.C</footer>
+  </body>
+</html>
