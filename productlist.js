@@ -2,14 +2,17 @@
 // Når der ikke står en kategori, viser vi Accessories.
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category") || "Accessories";
-const endpoint = `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(category)}&limit=10`;
+const endpoint = `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(category)}&limit=30`;
 const container = document.querySelector(".product_list_container");
 const statusText = document.querySelector("#status");
 const retryButton = document.querySelector("#retry");
+const filterButtons = document.querySelectorAll(".filter-button");
+let allProducts = [];
 
 document.querySelector("h1").textContent = category;
 document.title = `${category} | Studio Shop`;
 retryButton.addEventListener("click", getProducts);
+filterButtons.forEach((button) => button.addEventListener("click", filterProducts));
 
 getProducts();
 
@@ -23,6 +26,7 @@ async function getProducts() {
     const response = await fetch(endpoint);
     if (!response.ok) throw new Error(`API-fejl: ${response.status}`);
     const products = await response.json();
+    allProducts = products;
     console.table(products);
     showProducts(products);
   } catch (error) {
@@ -32,6 +36,21 @@ async function getProducts() {
   } finally {
     container.setAttribute("aria-busy", "false");
   }
+}
+
+function filterProducts(event) {
+  const selectedGender = event.currentTarget.textContent.trim();
+  const filteredProducts = selectedGender === "All"
+    ? allProducts
+    : allProducts.filter((product) => product.gender === selectedGender);
+
+  filterButtons.forEach((button) => {
+    const isActive = button === event.currentTarget;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", isActive);
+  });
+
+  showProducts(filteredProducts);
 }
 
 // Saml kortene i én tekststreng, og indsæt dem i HTML'en efter loopet.

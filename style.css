@@ -21,6 +21,10 @@ h1 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.055em; margin: .5rem
 .category-card:hover { background: #20251e; color: #fff; }
 .category-card:hover > span { color: #b7d28f; }
 #status { color: #596052; font-size: .85rem; margin: 1.5rem 0; }
+.filter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.5rem 0 .5rem; }
+.filter-bar > span { margin-right: .5rem; color: #596052; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+.filter-button { min-height: auto; padding: .55rem .8rem; border: 1px solid #c9cec1; background: transparent; color: #20251e; font-size: .8rem; }
+.filter-button:hover, .filter-button.active { border-color: #20251e; background: #20251e; color: #fff; }
 .back-link { display: inline-block; margin-bottom: 2rem; font-size: .85rem; text-underline-offset: .25rem; }
 .product-detail { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr); gap: clamp(2rem, 6vw, 7rem); align-items: start; }
 .detail-image { position: relative; background: #fff; border: 1px solid #eee; }
