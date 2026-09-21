@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+:root { font-family: Arial, Helvetica, sans-serif; color: #20251e; background: #fafaf7; }
+body { margin: 0; }
+a { color: inherit; }
+.site-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.6rem 5%; border-bottom: 1px solid #d9dcd3; }
+.logo { font-size: 1.3rem; font-weight: 800; letter-spacing: -.06em; text-decoration: none; }
+.logo span { color: #607545; }
+.site-header > span { font-size: .8rem; }
+main { max-width: 1500px; margin: 0 auto; padding: 4rem 5% 5rem; min-height: 75vh; }
+.eyebrow, .brand { text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; }
+.eyebrow { color: #5d684f; }
+.page-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-bottom: 1px solid #d9dcd3; padding-bottom: 1.8rem; }
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.055em; margin: .5rem 0; overflow-wrap: anywhere; }
+.page-heading > p { max-width: 22rem; line-height: 1.5; }
+#status { color: #596052; font-size: .85rem; margin: 1.5rem 0; }
+.product_list_container { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
+.product-card a { display: block; text-decoration: none; height: 100%; }
+.product-image { overflow: hidden; background: white; border: 1px solid #eee; }
+.product-image img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
+.brand { color: #596052; margin: 1rem 0 .5rem; }
+h2 { font-size: 1rem; font-weight: 500; line-height: 1.45; margin: 0; }
+.price { font-size: .9rem; font-weight: 700; margin: .65rem 0; }
+.product-link { display: flex; justify-content: space-between; padding: .75rem 0; border-bottom: 1px solid #c9cec1; font-size: .8rem; }
+.product-card a:hover .product-link { color: #506533; border-color: #506533; }
+a:focus-visible, button:focus-visible { outline: 3px solid #607545; outline-offset: 5px; }
+button { padding: .8rem 1rem; font: inherit; cursor: pointer; }
+footer { border-top: 1px solid #d9dcd3; padding: 1.5rem 5%; font-size: .75rem; color: #596052; }
+@media (max-width: 950px) { .product_list_container { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .product_list_container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1rem; }
+  .page-heading { display: block; }
+  .site-header > span { display: none; }
+  main { padding-top: 2rem; }
+}
+@media (max-width: 360px) { .product_list_container { grid-template-columns: 1fr; } }
