@@ -13,6 +13,19 @@ main { max-width: 1500px; margin: 0 auto; padding: 4rem 5% 5rem; min-height: 75v
 h1 { font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: -.055em; margin: .5rem 0; overflow-wrap: anywhere; }
 .page-heading > p { max-width: 22rem; line-height: 1.5; }
 #status { color: #596052; font-size: .85rem; margin: 1.5rem 0; }
+.back-link { display: inline-block; margin-bottom: 2rem; font-size: .85rem; text-underline-offset: .25rem; }
+.product-detail { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr); gap: clamp(2rem, 6vw, 7rem); align-items: start; }
+.detail-image { background: #fff; border: 1px solid #eee; }
+.detail-image img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: contain; }
+.detail-copy { position: sticky; top: 2rem; padding-top: 1rem; }
+.detail-copy h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); }
+.detail-brand { margin: 1.5rem 0 .4rem; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #596052; }
+.detail-price { font-size: 1.4rem; font-weight: 700; }
+.product-facts { margin: 2rem 0; border-top: 1px solid #d9dcd3; }
+.product-facts div { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid #d9dcd3; }
+.product-facts dt { color: #596052; }
+.product-facts dd { margin: 0; }
+.basket-button { width: 100%; border: 0; background: #20251e; color: #fff; font-weight: 700; }
 .product_list_container { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
 .product-card a { display: block; text-decoration: none; height: 100%; }
 .product-image { overflow: hidden; background: white; border: 1px solid #eee; }
@@ -31,5 +44,7 @@ footer { border-top: 1px solid #d9dcd3; padding: 1.5rem 5%; font-size: .75rem; c
   .page-heading { display: block; }
   .site-header > span { display: none; }
   main { padding-top: 2rem; }
+  .product-detail { grid-template-columns: 1fr; }
+  .detail-copy { position: static; }
 }
 @media (max-width: 360px) { .product_list_container { grid-template-columns: 1fr; } }

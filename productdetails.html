@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Produktdetaljer | Studio Shop</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="productdetails.js" defer></script>
   </head>
   <body>
-    <header class="site-header"><a class="logo" href="productlist.html">STUDIO SHOP<span> / </span></a></header>
+    <header class="site-header">
+      <a class="logo" href="index.html">STUDIO SHOP<span> / </span></a>
+      <span>Udvalgt til hverdagen</span>
+    </header>
     <main>
-      <p class="eyebrow">Næste øvelse</p>
-      <h1>Produktdetaljer</h1>
-      <p>Dette er en pladsholder. Visningen af det valgte produkt bygges i en senere opgave.</p>
-      <a href="productlist.html">← Tilbage til produktlisten</a>
+      <a class="back-link" href="productlist.html">← Tilbage til produktlisten</a>
+      <p id="status" role="status">Henter produkt…</p>
+      <button id="retry" type="button" hidden>Prøv igen</button>
+      <article class="product-detail" aria-busy="true"></article>
+      <noscript>Slå JavaScript til for at se produktet.</noscript>
     </main>
+    <footer>STUDIO SHOP / Studieprojekt · 08.01.B</footer>
   </body>
 </html>
