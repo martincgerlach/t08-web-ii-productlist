@@ -29,3 +29,5 @@ Ved netværksfejl vises en besked og en knap til at prøve igen.
 - `productdetails.html`: dynamiske oplysninger om det valgte produkt.
 
 Sortering hører til en senere øvelse og er ikke implementeret her.
+
+Forsidefoto: [Roman Manshin på Unsplash](https://unsplash.com/photos/woman-poses-in-a-stylish-neutral-toned-outfit-5-Gyzo506fg), brugt under [Unsplash License](https://unsplash.com/license).
