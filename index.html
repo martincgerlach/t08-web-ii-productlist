@@ -10,19 +10,24 @@
   <body>
     <header class="site-header">
       <a class="logo" href="index.html">STUDIO SHOP<span> / </span></a>
-      <span>Udvalgt til hverdagen</span>
+      <nav class="header-nav" aria-label="Hovednavigation"><a href="index.html" aria-current="page">Kategorier</a><a href="productlist.html">Accessories</a></nav>
     </header>
     <main>
-      <p class="eyebrow">Shop efter kategori</p>
-      <div class="page-heading home-heading">
-        <h1>Find din næste favorit.</h1>
-        <p>Vælg en kategori, og gå direkte til produkterne.</p>
-      </div>
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="home-hero-copy">
+          <p class="eyebrow">STUDIO SHOP / THE EDIT</p>
+          <h1 id="home-title">Din stil.<br /><em>Dit valg.</em></h1>
+          <p>Udforsk accessories, tøj og de små detaljer, der gør stilen til din egen.</p>
+          <a class="hero-link" href="#kategorier">Udforsk kategorierne <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="home-hero-image"><img src="https://kea-alt-del.dk/t7/images/webp/640/1535.webp" alt="Model med sort kasket fra kollektionen" width="640" height="853" /><span>THE EVERYDAY EDIT / 2026</span></div>
+      </section>
+      <div class="section-heading" id="kategorier"><div><p class="eyebrow">Udforsk</p><h2>Shop efter kategori</h2></div><p>Vælg det, du leder efter.</p></div>
       <p id="status" role="status">Henter kategorier…</p>
       <button id="retry" type="button" hidden>Prøv igen</button>
       <nav class="category_list_container" aria-label="Produktkategorier" aria-busy="true"></nav>
       <noscript>Slå JavaScript til for at se kategorierne.</noscript>
     </main>
-    <footer>STUDIO SHOP / Studieprojekt · 08.01.C</footer>
+    <footer>STUDIO SHOP</footer>
   </body>
 </html>
