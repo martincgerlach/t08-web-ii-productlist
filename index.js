@@ -2,6 +2,14 @@ const endpoint = "https://kea-alt-del.dk/t7/api/categories";
 const categoryContainer = document.querySelector(".category_list_container");
 const statusText = document.querySelector("#status");
 const retryButton = document.querySelector("#retry");
+const categoryImages = {
+  Accessories: 1535,
+  Apparel: 1528,
+  Footwear: 1543,
+  "Free Items": 16937,
+  "Personal Care": 18445,
+  "Sporting Goods": 2354,
+};
 
 retryButton.addEventListener("click", getCategories);
 getCategories();
@@ -29,13 +37,15 @@ async function getCategories() {
 function showCategories(categories) {
   let markup = "";
 
-  categories.forEach((item, index) => {
-    const number = String(index + 1).padStart(2, "0");
+  categories.forEach((item) => {
+    const imageId = categoryImages[item.category];
+    const image = imageId
+      ? `<img src="https://kea-alt-del.dk/t7/images/webp/640/${imageId}.webp" alt="" loading="lazy" width="640" height="800" />`
+      : "";
     markup += `
       <a class="category-card" href="productlist.html?category=${encodeURIComponent(item.category)}">
-        <span>${number}</span>
-        <strong>${escapeHTML(item.category)}</strong>
-        <span aria-hidden="true">↗</span>
+        <span class="category-photo">${image}</span>
+        <span class="category-caption"><strong>${escapeHTML(item.category)}</strong><span aria-hidden="true">↗</span></span>
       </a>`;
   });
 
