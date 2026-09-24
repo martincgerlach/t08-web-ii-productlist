@@ -44,7 +44,7 @@ function showCategories(categories) {
       : "";
     markup += `
       <a class="category-card" href="productlist.html?category=${encodeURIComponent(item.category)}">
-        <span class="category-photo">${image}</span>
+        <span class="category-photo">${image}<span class="category-prompt" aria-hidden="true">Se kategori ↗</span></span>
         <span class="category-caption"><strong>${escapeHTML(item.category)}</strong><span aria-hidden="true">↗</span></span>
       </a>`;
   });
