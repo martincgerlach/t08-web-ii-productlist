@@ -180,11 +180,11 @@ h1 {
   border-color: var(--accent);
 }
 
-.hero-link span {
+.hero-link span:last-child {
   transition: transform .2s ease;
 }
 
-.hero-link:hover span, .hero-link:focus-visible span {
+.hero-link:hover span:last-child, .hero-link:focus-visible span:last-child {
   transform: translate(3px, 3px);
 }
 
@@ -806,11 +806,490 @@ a:focus-visible, button:focus-visible {
     scroll-behavior: auto;
   }
 
-  .hero-link span, .category-photo img, .category-prompt, .category-caption > span, .product-card, .product-image img {
+  .hero-link span:last-child, .category-photo img, .category-prompt, .category-caption > span, .product-card, .product-image img {
     transition: none;
   }
 
-  .hero-link:hover span, .hero-link:focus-visible span, .category-card:hover .category-photo img, .category-card:hover .category-caption > span, .product-card:hover, .product-card:focus-within, .product-card a:hover .product-image img, .product-card a:focus-visible .product-image img {
+  .hero-link:hover span:last-child, .hero-link:focus-visible span:last-child, .category-card:hover .category-photo img, .category-card:hover .category-caption > span, .product-card:hover, .product-card:focus-within, .product-card a:hover .product-image img, .product-card a:focus-visible .product-image img {
+    transform: none;
+  }
+}
+
+/* Forsidens tilpasninger: godkendt layout og slider */
+.home-page main {
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+}
+
+.home-page .site-header {
+  min-height: 61px;
+  padding: .8rem 9.6%;
+}
+
+.home-page .header-nav {
+  gap: 2.7rem;
+}
+
+.home-page .home-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-bottom: 1px solid var(--line);
+  background: #f6f3ef;
+}
+
+.home-page .home-hero-copy {
+  order: 1;
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 3.2rem 7% 2.6rem;
+}
+
+.home-page .home-hero-copy .eyebrow {
+  margin: 0 0 1rem;
+}
+
+.home-page .home-hero-copy h1 {
+  margin: 0 0 1.3rem;
+  font-size: clamp(4.1rem, 13vw, 5.8rem);
+  line-height: .9;
+}
+
+.home-page .home-hero-copy h1 em {
+  display: inline-block;
+  margin-top: .12em;
+}
+
+.home-page .home-hero-copy > p:not(.eyebrow) {
+  max-width: 22rem;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.home-page .hero-link {
+  min-width: 15.7rem;
+  margin-top: 1.25rem;
+  padding: .75rem 0;
+}
+
+.home-page .hero-link:hover span:last-child, .home-page .hero-link:focus-visible span:last-child {
+  transform: translateX(4px);
+}
+
+.home-page .home-hero-image {
+  order: 2;
+  position: relative;
+  min-height: 0;
+  height: 64vw;
+  max-height: 520px;
+  background: #d9d1c8;
+}
+
+.home-page .home-hero-image img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+/* Billedbeskæring til de enkelte slides. */
+.home-page .home-hero-image[data-slide="apparel"] img {
+  object-position: center top;
+}
+
+.home-page .home-hero-image[data-slide="footwear"] img {
+  object-position: center 61%;
+}
+
+.home-page .home-hero-image[data-slide="accessories"] {
+  background: #d6d3cd;
+}
+
+.home-page .home-hero-image[data-slide="accessories"] img {
+  position: absolute;
+  top: 0;
+  right: 8%;
+  width: auto;
+  height: 110%;
+  max-width: none;
+  object-fit: contain;
+}
+
+.home-page .home-hero-image > span {
+  right: 1rem;
+  bottom: 1rem;
+  padding: .9rem 1rem;
+  background: rgba(250, 248, 245, .94);
+  color: var(--ink);
+  font-size: .63rem;
+}
+
+.home-page .home-hero-label {
+  display: none;
+}
+
+.home-page .hero-controls {
+  order: 3;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .7rem 7%;
+  background: #ded8d1;
+  font-size: .72rem;
+}
+
+.home-page .hero-current {
+  font-size: 1.05rem;
+}
+
+.home-page .hero-progress {
+  display: block;
+  width: 5rem;
+  height: 1px;
+  background: #aaa29a;
+}
+
+.home-page .hero-progress > span {
+  display: block;
+  width: var(--hero-progress, 25%);
+  height: 1px;
+  background: var(--ink);
+  transition: width .25s ease;
+}
+
+.home-page .hero-control-buttons {
+  display: flex;
+  gap: .45rem;
+  margin-left: auto;
+}
+
+.home-page .hero-control-buttons button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid #a59e97;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: background .2s ease, color .2s ease;
+}
+
+.home-page .hero-control-buttons button:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.home-page .home-categories {
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 2.1rem 7% 3.4rem;
+}
+
+.home-page .section-heading {
+  align-items: end;
+  padding: 0 0 1.25rem;
+}
+
+.home-page .section-heading .eyebrow {
+  margin: 0;
+}
+
+.home-page .section-heading h2 {
+  margin: .15rem 0 0;
+  font-size: clamp(2.65rem, 4vw, 3.45rem);
+}
+
+.home-page .section-heading > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: none;
+  min-width: 7.6rem;
+  margin-bottom: .15rem;
+  padding-bottom: .45rem;
+  border-bottom: 1px solid #a59e97;
+  font-size: .73rem;
+  text-decoration: none;
+}
+
+.home-page .section-heading > a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.home-page .category_list_container {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.home-page .category-card {
+  background: #fcfaf8;
+}
+
+.home-page .category-photo {
+  aspect-ratio: 1.2;
+  background: #ddd6cf;
+}
+
+.home-page .category-photo img {
+  object-position: center 20%;
+  mix-blend-mode: multiply;
+}
+
+.home-page .category-card:first-child .category-photo img {
+  object-position: center bottom;
+}
+
+.home-page .category-prompt {
+  display: none;
+}
+
+.home-page .category-caption {
+  min-height: 3.8rem;
+  padding: .55rem .8rem;
+  border: 0;
+}
+
+.home-page .category-caption strong {
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  white-space: normal;
+}
+
+.home-page .category-caption > span {
+  font-size: 1.1rem;
+}
+
+.home-page #status:empty {
+  display: none;
+}
+
+.home-page #retry {
+  margin-bottom: 1rem;
+}
+
+/* Forside på store skærme */
+@media (min-width: 1000px) {
+  .home-page .home-hero {
+    height: clamp(420px, 27.4vw, 500px);
+    overflow: hidden;
+  }
+
+  .home-page .home-hero-image {
+    position: absolute;
+    z-index: 0;
+    inset: 0 10.4% 0 32%;
+    width: auto;
+    height: auto;
+    max-height: none;
+  }
+
+  .home-page .home-hero-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #f6f3ef 0%, rgba(246, 243, 239, .88) 14%, rgba(246, 243, 239, 0) 45%);
+    pointer-events: none;
+  }
+
+  .home-page .home-hero-image img {
+    object-position: center 16%;
+  }
+
+  .home-page .home-hero-image[data-slide="apparel"] img {
+    object-position: center top;
+  }
+
+  .home-page .home-hero-image[data-slide="footwear"] img {
+    object-position: center 61%;
+  }
+
+  .home-page .home-hero-image[data-slide="accessories"] img {
+    top: -4%;
+    right: 13%;
+    height: 120%;
+  }
+
+  .home-page .home-hero-image > span {
+    display: none;
+  }
+
+  .home-page .home-hero-label {
+    position: absolute;
+    z-index: 3;
+    right: 5%;
+    bottom: 2.2rem;
+    display: block;
+    padding: .9rem 1rem;
+    background: rgba(250, 248, 245, .94);
+    font-size: .63rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+
+  .home-page .home-hero-copy {
+    width: min(43%, 630px);
+    height: 100%;
+    padding: clamp(3rem, 4vw, 4.6rem) 0 2rem 10.1%;
+  }
+
+  .home-page .home-hero-copy h1 {
+    font-size: clamp(5rem, 6.2vw, 6.6rem);
+  }
+
+  .home-page .hero-controls {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10.4%;
+    min-width: 120px;
+    padding: 3.5rem 0 0;
+    background: #d9d1c8;
+  }
+
+  .home-page .hero-current {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .home-page .hero-progress {
+    width: 1px;
+    height: 6rem;
+    margin: .6rem 0 0;
+    background: #aaa29a;
+  }
+
+  .home-page .hero-progress > span {
+    width: 1px;
+    height: var(--hero-progress, 25%);
+    transition: height .25s ease;
+  }
+
+  .home-page .hero-total {
+    margin-top: .55rem;
+  }
+
+  .home-page .hero-control-buttons {
+    flex-direction: column;
+    margin: -.6rem 0 0;
+  }
+}
+
+/* Forsidens kategorier på tablet */
+@media (min-width: 760px) {
+  .home-page .category_list_container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Forsidens kategorier på store skærme */
+@media (min-width: 1180px) {
+  .home-page .home-categories {
+    padding-right: 3.7%;
+    padding-left: 3.7%;
+    padding-bottom: 4.5rem;
+  }
+
+  .home-page .category_list_container {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .home-page .section-heading {
+    margin: 0 3.1rem;
+  }
+}
+
+/* Forside på mobil */
+@media (max-width: 620px) {
+  .home-page .site-header {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+    padding: .9rem 7%;
+  }
+
+  .home-page .logo {
+    font-size: 1.1rem;
+  }
+
+  .home-page .header-nav {
+    gap: 1rem;
+  }
+
+  .home-page .header-nav a {
+    font-size: .62rem;
+  }
+
+  .home-page .section-heading {
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .home-page .section-heading > a {
+    margin-top: .7rem;
+  }
+}
+
+/* Forside på små mobilskærme */
+@media (max-width: 430px) {
+  .home-page .home-hero-copy {
+    padding-top: 2.5rem;
+  }
+
+  .home-page .home-hero-copy h1 {
+    font-size: clamp(3.65rem, 14vw, 4.5rem);
+  }
+
+  .home-page .home-hero-image {
+    height: 78vw;
+  }
+
+  .home-page .home-categories {
+    padding-top: 2.4rem;
+  }
+
+  .home-page .section-heading {
+    display: block;
+  }
+
+  .home-page .section-heading > a {
+    width: max-content;
+  }
+
+  .home-page .category_list_container {
+    gap: .55rem;
+  }
+
+  .home-page .category-caption {
+    min-height: 3.5rem;
+    padding: .4rem .5rem;
+  }
+
+  .home-page .category-caption strong {
+    font-size: 1rem;
+  }
+}
+
+/* Reduceret bevægelse */
+@media (prefers-reduced-motion: reduce) {
+  .home-page .hero-progress > span, .home-page .hero-control-buttons button {
+    transition: none;
+  }
+
+  .home-page .hero-link:hover span:last-child, .home-page .hero-link:focus-visible span:last-child {
     transform: none;
   }
 }

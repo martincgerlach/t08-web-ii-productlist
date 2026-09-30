@@ -8,25 +8,37 @@
     <script src="helpers.js" defer></script>
     <script src="index.js" defer></script>
   </head>
-  <body>
+  <body class="home-page">
     <header class="site-header">
       <a class="logo" href="index.html">STUDIO SHOP<span> / </span></a>
       <nav class="header-nav" aria-label="Hovednavigation"><a href="index.html" aria-current="page">Kategorier</a><a href="productlist.html">Accessories</a></nav>
     </header>
     <main>
       <section class="home-hero" aria-labelledby="home-title">
+        <div class="home-hero-image" data-slide="editorial"><img id="hero-image" src="images/hero-fashion.jpg" alt="Model i lyst outfit ved et vindue" width="1200" height="1800" /><span id="hero-image-label-mobile">THE EVERYDAY EDIT / 2026</span></div>
+        <span class="home-hero-label" id="hero-image-label">THE EVERYDAY EDIT / 2026</span>
         <div class="home-hero-copy">
-          <p class="eyebrow">STUDIO SHOP / THE EDIT</p>
+          <p class="eyebrow" id="hero-eyebrow">STUDIO SHOP / THE EDIT</p>
           <h1 id="home-title">Din stil.<br /><em>Dit valg.</em></h1>
-          <p>Udforsk accessories, tøj og de små detaljer, der gør stilen til din egen.</p>
-          <a class="hero-link" href="#kategorier">Udforsk kategorierne <span aria-hidden="true">↘</span></a>
+          <p id="hero-description">Udforsk accessories, tøj og de små detaljer, der gør stilen til din egen.</p>
+          <a class="hero-link" id="hero-link" href="#kategorier"><span id="hero-link-text">Udforsk kategorierne</span><span aria-hidden="true">→</span></a>
         </div>
-        <div class="home-hero-image"><img src="images/hero-fashion.jpg" alt="Model i lyst outfit ved et vindue" width="1200" height="1800" /><span>THE EVERYDAY EDIT / 2026</span></div>
+        <div class="hero-controls" aria-label="Udvalgte temaer">
+          <span class="hero-current" id="hero-current" aria-live="polite">01</span>
+          <span class="hero-progress" aria-hidden="true"><span id="hero-progress-fill"></span></span>
+          <span class="hero-total">04</span>
+          <div class="hero-control-buttons">
+            <button id="hero-previous" type="button" aria-label="Forrige tema">←</button>
+            <button id="hero-next" type="button" aria-label="Næste tema">→</button>
+          </div>
+        </div>
       </section>
-      <div class="section-heading" id="kategorier"><div><p class="eyebrow">Udforsk</p><h2>Shop efter kategori</h2></div><p>Vælg det, du leder efter.</p></div>
-      <p id="status" role="status">Henter kategorier…</p>
-      <button id="retry" type="button" hidden>Prøv igen</button>
-      <nav class="category_list_container" aria-label="Produktkategorier" aria-busy="true"></nav>
+      <section class="home-categories" id="kategorier" aria-labelledby="category-title">
+        <div class="section-heading"><div><p class="eyebrow">DISCOVER</p><h2 id="category-title">Shop efter kategori</h2></div><a href="#category-grid">Se alle kategorier <span aria-hidden="true">→</span></a></div>
+        <p id="status" role="status">Henter kategorier…</p>
+        <button id="retry" type="button" hidden>Prøv igen</button>
+        <nav class="category_list_container" id="category-grid" aria-label="Produktkategorier" aria-busy="true"></nav>
+      </section>
       <noscript>Slå JavaScript til for at se kategorierne.</noscript>
     </main>
     <footer>STUDIO SHOP</footer>
