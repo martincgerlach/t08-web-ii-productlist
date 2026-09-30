@@ -52,9 +52,3 @@ function showCategories(categories) {
   categoryContainer.innerHTML = markup;
   statusText.textContent = `${categories.length} kategorier`;
 }
-
-function escapeHTML(value) {
-  const element = document.createElement("span");
-  element.textContent = String(value);
-  return element.innerHTML.replaceAll('"', "&quot;").replaceAll("'", "&#39;");
-}

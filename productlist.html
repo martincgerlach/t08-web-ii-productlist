@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Accessories | Studio Shop</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="helpers.js" defer></script>
     <script src="productlist.js" defer></script>
   </head>
   <body>
@@ -18,12 +19,19 @@
         <h1>Accessories</h1>
         <p>Find det, der passer til din stil.</p>
       </div>
-      <div class="filter-bar" aria-label="Filtrer produkter efter køn">
+      <div class="filter-bar" role="group" aria-label="Filtrer produkter efter køn">
         <span>Vis</span>
         <button class="filter-button active" type="button" aria-pressed="true">All</button>
         <button class="filter-button" type="button" aria-pressed="false">Unisex</button>
         <button class="filter-button" type="button" aria-pressed="false">Women</button>
         <button class="filter-button" type="button" aria-pressed="false">Men</button>
+      </div>
+      <div class="filter-bar" role="group" aria-label="Sortér produkter">
+        <span>Sortér</span>
+        <button class="sort-button" type="button" data-sort="price-up" aria-pressed="false">Pris: lav–høj</button>
+        <button class="sort-button" type="button" data-sort="price-down" aria-pressed="false">Pris: høj–lav</button>
+        <button class="sort-button" type="button" data-sort="name-az" aria-pressed="false">Navn: A–Z</button>
+        <button class="sort-button" type="button" data-sort="name-za" aria-pressed="false">Navn: Z–A</button>
       </div>
       <p id="status" role="status">Henter produkter…</p>
       <button id="retry" type="button" hidden>Prøv igen</button>

@@ -1,5 +1,4 @@
-// Læs kategorien fra URL'en, fx productlist.html?category=Apparel.
-// Når der ikke står en kategori, viser vi Accessories.
+
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category") || "Accessories";
 const endpoint = `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(category)}&limit=30`;
@@ -7,92 +6,157 @@ const container = document.querySelector(".product_list_container");
 const statusText = document.querySelector("#status");
 const retryButton = document.querySelector("#retry");
 const filterButtons = document.querySelectorAll(".filter-button");
+const sortButtons = document.querySelectorAll(".sort-button");
 let allProducts = [];
+let currentFilter = "All";
+let currentSort = "";
+let productsLoaded = false;
 
 document.querySelector("h1").textContent = category;
 document.title = `${category} | Studio Shop`;
 retryButton.addEventListener("click", getProducts);
 filterButtons.forEach((button) => button.addEventListener("click", filterProducts));
+sortButtons.forEach((button) => button.addEventListener("click", sortProducts));
 
 getProducts();
 
-// Hent JSON fra API'et, og send produkterne videre til visningen.
-async function getProducts() {
+// Hent produkterne og vis dem, når svaret fra API'et er klar.
+function getProducts() {
+  productsLoaded = false;
   container.setAttribute("aria-busy", "true");
   statusText.textContent = "Henter produkter…";
   retryButton.hidden = true;
 
-  try {
-    const response = await fetch(endpoint);
-    if (!response.ok) throw new Error(`API-fejl: ${response.status}`);
-    const products = await response.json();
-    allProducts = products;
-    console.table(products);
-    showProducts(products);
-  } catch (error) {
-    statusText.textContent = "Produkterne kunne ikke hentes. Prøv igen.";
-    retryButton.hidden = false;
-    console.error(error);
-  } finally {
-    container.setAttribute("aria-busy", "false");
-  }
+  fetch(endpoint)
+    .then((response) => {
+      if (!response.ok) throw new Error(`API-fejl: ${response.status}`);
+      return response.json();
+    })
+    .then((products) => {
+      allProducts = products;
+      productsLoaded = true;
+      console.table(products);
+      renderProducts();
+      container.setAttribute("aria-busy", "false");
+    })
+    .catch((error) => {
+      statusText.textContent = "Produkterne kunne ikke hentes. Prøv igen.";
+      retryButton.hidden = false;
+      container.setAttribute("aria-busy", "false");
+      console.error(error);
+    });
 }
 
 function filterProducts(event) {
-  const selectedGender = event.currentTarget.textContent.trim();
-  const filteredProducts = selectedGender === "All"
-    ? allProducts
-    : allProducts.filter((product) => product.gender === selectedGender);
+  currentFilter = event.currentTarget.textContent.trim();
 
   filterButtons.forEach((button) => {
-    const isActive = button === event.currentTarget;
-    button.classList.toggle("active", isActive);
-    button.setAttribute("aria-pressed", isActive);
+    if (button === event.currentTarget) {
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.classList.remove("active");
+      button.setAttribute("aria-pressed", "false");
+    }
   });
 
-  showProducts(filteredProducts);
+  renderProducts();
 }
 
-// Saml kortene i én tekststreng, og indsæt dem i HTML'en efter loopet.
+function sortProducts(event) {
+  currentSort = event.currentTarget.dataset.sort;
+
+  sortButtons.forEach((button) => {
+    if (button === event.currentTarget) {
+      button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      button.classList.remove("active");
+      button.setAttribute("aria-pressed", "false");
+    }
+  });
+
+  renderProducts();
+}
+
+// En kopi filtreres og sorteres, så den oprindelige produktliste bevares.
+function renderProducts() {
+  if (!productsLoaded) return;
+
+  let visibleProducts = [...allProducts];
+  if (currentFilter !== "All") {
+    visibleProducts = visibleProducts.filter((product) => product.gender === currentFilter);
+  }
+
+  if (currentSort === "price-up") {
+    visibleProducts.sort((a, b) => getProductPrice(a) - getProductPrice(b));
+  } else if (currentSort === "price-down") {
+    visibleProducts.sort((a, b) => getProductPrice(b) - getProductPrice(a));
+  } else if (currentSort === "name-az") {
+    visibleProducts.sort((a, b) => String(a.productdisplayname).localeCompare(String(b.productdisplayname), "da"));
+  } else if (currentSort === "name-za") {
+    visibleProducts.sort((a, b) => String(b.productdisplayname).localeCompare(String(a.productdisplayname), "da"));
+  }
+
+  showProducts(visibleProducts);
+}
+
 function showProducts(products) {
   let markup = "";
 
   products.forEach((product) => {
-    const discountedPrice = Math.round(product.price - (product.price * product.discount) / 100);
-    const stateClasses = `${product.soldout ? "sold-out" : ""} ${product.discount ? "on-sale" : ""}`;
+    const discount = Number(product.discount);
+    let stateClasses = "";
+    let badges = "";
+    let priceMarkup = `<p class="price">DKK ${formatPrice(product.price)},-</p>`;
+
+    if (product.soldout) {
+      stateClasses += " sold-out";
+      badges += '<span class="badge sold-out-badge">Udsolgt</span>';
+    }
+
+    if (discount > 0 && discount <= 100) {
+      const discountedPrice = getProductPrice(product);
+      stateClasses += " on-sale";
+      badges += `<span class="badge sale-badge">-${discount}%</span>`;
+      priceMarkup = `<p class="price original-price">DKK ${formatPrice(product.price)},-</p>
+                     <p class="sale-price">Nu DKK ${formatPrice(discountedPrice)},-</p>`;
+    }
+
     markup += `
-      <article class="product-card ${stateClasses}">
-        <a href="productdetails.html?id=${encodeURIComponent(product.id)}">
+      <article class="product-card${stateClasses}">
+        <a href="productdetails.html?id=${encodeURIComponent(product.id)}&amp;category=${encodeURIComponent(category)}">
           <div class="product-image">
             <img src="https://kea-alt-del.dk/t7/images/webp/640/${encodeURIComponent(product.id)}.webp"
                  alt="${escapeHTML(product.productdisplayname)}" width="640" height="853" loading="lazy" />
-            <div class="product-badges">
-              ${product.soldout ? '<span class="badge sold-out-badge">Udsolgt</span>' : ""}
-              ${product.discount ? `<span class="badge sale-badge">-${product.discount}%</span>` : ""}
-            </div>
+            <div class="product-badges">${badges}</div>
           </div>
           <p class="brand">${escapeHTML(product.brandname)}</p>
           <h2>${escapeHTML(product.productdisplayname)}</h2>
-          <div class="price-row">
-            <p class="price ${product.discount ? "original-price" : ""}">DKK ${formatPrice(product.price)},-</p>
-            ${product.discount ? `<p class="sale-price">Nu DKK ${formatPrice(discountedPrice)},-</p>` : ""}
-          </div>
+          <div class="price-row">${priceMarkup}</div>
           <span class="product-link">Se produkt <span aria-hidden="true">↗</span></span>
         </a>
       </article>`;
   });
 
   container.innerHTML = markup;
-  statusText.textContent = products.length ? `${products.length} produkter` : "Ingen produkter i denne kategori.";
+  if (products.length > 0) {
+    statusText.textContent = `${products.length} produkter`;
+  } else {
+    statusText.textContent = "Ingen produkter i denne kategori.";
+  }
 }
 
 function formatPrice(price) {
   return new Intl.NumberFormat("da-DK").format(price);
 }
 
-// Sørg for, at tekst fra API'et behandles som tekst i vores HTML.
-function escapeHTML(value) {
-  const element = document.createElement("span");
-  element.textContent = String(value);
-  return element.innerHTML.replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+// Sortering og produktkort skal bruge den samme pris, også ved tilbud.
+function getProductPrice(product) {
+  const price = Number(product.price);
+  const discount = Number(product.discount);
+  if (discount > 0 && discount <= 100) {
+    return Math.round(price * (100 - discount) / 100);
+  }
+  return price;
 }

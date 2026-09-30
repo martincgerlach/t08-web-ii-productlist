@@ -65,8 +65,8 @@ h1 { font-family: var(--display); font-size: clamp(3.5rem, 7vw, 7.5rem); font-we
 #retry { padding: .7rem 1rem; border: 1px solid var(--ink); background: transparent; }
 .filter-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; padding-top: 1.6rem; }
 .filter-bar > span { margin-right: .7rem; color: var(--muted); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-.filter-button { padding: .5rem .95rem; border: 1px solid var(--line); border-radius: 0; background: transparent; font-size: .76rem; }
-.filter-button:hover, .filter-button.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+.filter-button, .sort-button { padding: .5rem .95rem; border: 1px solid var(--line); border-radius: 0; background: transparent; font-size: .76rem; }
+.filter-button:hover, .filter-button.active, .sort-button:hover, .sort-button.active { border-color: var(--ink); background: var(--ink); color: #fff; }
 .product_list_container { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3.5rem 1.35rem; }
 .product-card { transition: transform .25s ease; }
 .product-card:hover, .product-card:focus-within { transform: translateY(-5px); }

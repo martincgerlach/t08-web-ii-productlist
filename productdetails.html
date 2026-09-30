@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Produktdetaljer | Studio Shop</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="helpers.js" defer></script>
     <script src="productdetails.js" defer></script>
   </head>
   <body>
@@ -13,7 +14,7 @@
       <nav class="header-nav" aria-label="Hovednavigation"><a href="index.html">Kategorier</a><a href="productlist.html">Accessories</a></nav>
     </header>
     <main>
-      <a class="back-link" href="productlist.html">← Tilbage til produktlisten</a>
+      <a class="back-link" id="back-to-products" href="productlist.html?category=Accessories">← Tilbage til produktlisten</a>
       <p id="status" role="status">Henter produkt…</p>
       <button id="retry" type="button" hidden>Prøv igen</button>
       <article class="product-detail" aria-busy="true"></article>
